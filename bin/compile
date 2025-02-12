@@ -1,8 +1,11 @@
 #!/bin/sh
+# bin/compile BUILD_DIR CACHE_DIR ENV_DIR
 
 set -eu
 
-METABASE_VERSION=`cat ./bin/version`
+STATIC_METABASE_VERSION=`cat ./bin/version`
+DYNAMIC_METABASE_VERSION=`cat ${ENV_DIR}/METABASE_VERSION`
+METABASE_VERSION="${DYNAMIC_METABASE_VERSION:-$STATIC_METABASE_VERSION}"
 METABASE_DIR="$1/target/uberjar"
 METABASE_JAR="$METABASE_DIR/metabase.jar"
 METABASE_URL="https://downloads.metabase.com/v$METABASE_VERSION/metabase.jar"
